@@ -23,7 +23,7 @@ Route::get('/dashboard', function () {
     return view('Inicio');
 })->middleware(['auth', 'verified'])->name('Inicio');
 
-Route::get('/inventario', function () {
+Route::get('/Inventario', function () {
     return view('Inventario');
 })->middleware(['auth', 'verified'])->name('Inventario');
 

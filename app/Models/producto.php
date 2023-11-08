@@ -9,3 +9,4 @@ class producto extends Model
 {
     use HasFactory;
 }
+

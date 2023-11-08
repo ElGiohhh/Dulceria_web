@@ -60,6 +60,6 @@ class ProductoController extends Controller
      */
     public function destroy(producto $producto)
     {
-        //
+        //->(like.&.palabra.&.)
     }
 }
