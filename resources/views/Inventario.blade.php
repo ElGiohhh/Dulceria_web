@@ -1,10 +1,18 @@
+<x-plantilla>
 
-<x-app-layout>
   <x-slot name="header">
       <h2 class="font-semibold text-xl text-gray-600 dark:text-gray-400 leading-tight">
           {{ __('Inventario') }}
       </h2>
   </x-slot>
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
   
   <div class="table-responsive">
     <table class="table table-primary">
@@ -30,7 +38,8 @@
     </table>
   </div>
   
- 
-    
 
-</x-app-layout>
+    
+</x-plantilla>
+
+

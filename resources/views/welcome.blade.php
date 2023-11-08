@@ -32,6 +32,9 @@
             @endif
 
       </div>
+
+
+      <img src="ruta_de_la_imagen.jpg" alt="Texto alternativo">
     
 </body>
 </html>
