@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Dulceria</title>
+        <title>Laravel</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -30,11 +30,10 @@
                     @endauth
                 </div>
             @endif
-
-      </div>
-
-
-      <img src="ruta_de_la_imagen.jpg" alt="Texto alternativo">
-    
-</body>
+          <img src="{{ asset('imagenes/Proyecto nuevo.png') }}" alt=" ">
+        </div>
+        <x-application-logo>
+        </x-application-logo>
+        
+    </body>
 </html>
