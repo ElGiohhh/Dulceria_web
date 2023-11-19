@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Producto;
 use App\Models\Carrito;
 use Illuminate\Http\Request;
 
@@ -13,30 +14,40 @@ class CarritoController extends Controller
         
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Obtener los productos seleccionados del cuerpo de la solicitud
-        $productosSeleccionados = $_POST['productos_seleccionados'] ?? [];
+        $productos_seleccionados = $_POST['productos_seleccionados'] ?? [];
 
         // Aquí puedes procesar los productos seleccionados, guardarlos en una base de datos, etc.
         // Por ejemplo, imprimir los productos seleccionados:
-        echo json_encode($productosSeleccionados); // Envía los productos seleccionados de vuelta como JSON
+        echo json_encode($productos_seleccionados); // Envía los productos seleccionados de vuelta como JSON
         exit; // Termina el script
     }
     }
 
-    public function create()
+    
+    
+    public function mostrarProductosSeleccionados(Request $request)
     {
-        return view('crud.Venta');
+        // Obtener los IDs de los productos seleccionados enviados por POST
+        $productos_seleccionadosIds = $request->input('productos_seleccionados');
+        
+        // Consultar la base de datos para obtener los detalles de los productos seleccionados
+        $productos_seleccionados = Producto::whereIn('id', $productos_seleccionadosIds)->get();
+        
+        // Pasar los productos a una vista para mostrarlos
+        return view('Venta')->with('productos_seleccionados', $productos_seleccionados);
     }
+    
 
     public function store(Request $request)
     {
-        /* Valida los datos del formulario
+        //Valida los datos del formulario
         $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string',
             'cantidad' => 'required|int|max:10',
             'precio_menudeo' => 'required|max:6',
             'precio_mayoreo' => 'required|max:6',
-        ]);*/
+        ]);
 
         $producto = new productos;
         $producto->nombre = $request->nombre;

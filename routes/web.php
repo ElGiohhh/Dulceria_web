@@ -55,7 +55,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-
+Route::post('/mostrar-productos-seleccionados', 'ProductoController@mostrarProductosSeleccionados')->name('mostrar.productos.seleccionados');
 
 Route::resource('producto', ProductoController::class)->middleware(['auth', 'verified']);
 

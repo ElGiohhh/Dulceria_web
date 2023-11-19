@@ -8,50 +8,52 @@
     @extends('layouts.app') 
     @section('content')
     
+    <table class="table" id="carritoProductos">
+    <thead class="table-dark">
+        <tr>
+        <th>ID Producto</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Cantidad</th>
+        <th>Precio Menudeo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Aquí se llenarán dinámicamente los productos seleccionados -->
     
-        <div id="productosEnCarrito"></div>
-        const productosSeleccionados = [1, 3, 5]; 
-        function obtenerDetallesProducto(id) {
-            
-            return {
-                nombre: `Producto ${id}`,
-                precio: 19.99 
-                // Otros detalles del producto...
-            };
-        }
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        // Suponiendo que tienes los datos de los productos en la variable productosSeleccionados
+        const productos_seleccionados = [
+            // ... datos de los productos
+        ];
 
-    
+        const tablaProductos = document.getElementById('carritoProductos');
+
         function mostrarProductosSeleccionados() {
-            const productosEnCarrito = document.getElementById('productosEnCarrito');
-            
-            
-            productosEnCarrito.innerHTML = '';
-            
-            
-            productosSeleccionados.forEach((id) => {
-                const producto = obtenerDetallesProducto(id);
-                
-            
-                const productoHTML = document.createElement('div');
-                productoHTML.innerHTML = `
-                    <table id="productosEnCarrito">
-                    <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Precio</th>
-                    </tr>
-                    </thead>
-                    <tbody></tbody>
-                    </table>
-                `;
-                
-                
-                productosEnCarrito.appendChild(productoHTML);
+            const tbody = tablaProductos.querySelector('tbody');
+            tbody.innerHTML = ''; // Limpiar el contenido previo
+
+            productos_seleccionados.forEach(producto => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${producto.id}</td>
+                <td>${producto.nombre}</td>
+                <td>${producto.descripcion}</td>
+                <td>${producto.cantidad}</td>
+                <td>${producto.precio_menudeo}</td>
+                <!-- Agrega más campos si es necesario -->
+            `;
+            tbody.appendChild(row);
             });
         }
 
+        mostrarProductosSeleccionados(); // Llama a esta función para mostrar los productos al cargar la página
+        });
 
-     mostrarProductosSeleccionados();
+    </script>
+    </tbody>
+    </table>
 
 
      @endsection
