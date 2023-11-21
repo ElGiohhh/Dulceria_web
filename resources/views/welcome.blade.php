@@ -32,8 +32,7 @@
             @endif
           <img src="{{ asset('imagenes/Proyecto nuevo.png') }}" alt=" ">
         </div>
-        <x-application-logo>
-        </x-application-logo>
+        
         
     </body>
 </html>

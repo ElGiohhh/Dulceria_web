@@ -4,29 +4,23 @@
             {{ __('Configuracion') }}
         </h2>
     </x-slot>
-
-            <!-- Modal trigger button -->
-            <button type="button" class="btn btn-success btn-lg m-3 p-1" data-bs-toggle="modal" data-bs-target="#registrartra">
-                <img src="{{ asset('imagenes/poke-ball.jpg') }}" class="img-thumbnail border rounded" alt="..."  style="width: 40%;" />
+            <button type="button" class="btn btn-success btn-lg m-3 p-3" data-bs-toggle="modal" data-bs-target="#registrartra">
                 <x-logo></x-logo>  Registrar producto
             </button>
-            <!-- Modal trigger button -->
-            <button type="button" class="btn btn-success btn-lg m-3 p-1" data-bs-toggle="modal" data-bs-target="#ModalCL">
-               <img src="{{ asset('imagenes/poke-ball.jpg') }}" class="img-thumbnail border rounded" alt="..."  style="width: 40%;" />
+            <button type="button" class="btn btn-success btn-lg m-3 p-3" data-bs-toggle="modal" data-bs-target="#ModalCL">
                <x-logo></x-logo>     Registrar Cliente
             </button>
             <br>
-            <!-- Modal trigger button -->
-            <button type="button" class="btn btn-danger btn-lg btn-block m-3 p-1" data-bs-toggle="modal" data-bs-target="#Eliminar">
-             <img src="{{ asset('imagenes/poke-ball.jpg') }}" class="img-thumbnail border rounded" alt="..."  style="width: 40%;" />
+            <button type="button" class="btn btn-danger  btn-lg m-3 p-3" data-bs-toggle="modal" data-bs-target="#Eliminar">
             <x-logoa></x-logoa>  Eliminar producto
             </button>
-            <!-- Modal trigger button -->
-            <button type="button" class="btn btn-danger btn-lg m-3 p-1" data-bs-toggle="modal" data-bs-target="#EliminarCl">
-             <img src="{{ asset('imagenes/poke-ball.jpg') }}" class="img-thumbnail border rounded" alt="..."  style="width: 40%;" />
+            <button type="button" class="btn btn-danger  btn-lg m-3 p-3" data-bs-toggle="modal" data-bs-target="#EliminarCl">
             <x-logoa></x-logoa>  Eliminar Cliente
             </button>
-            
+            <br>
+            <button type="button" class="btn btn-primary btn-lg m-3 p-3" data-bs-toggle="modal" data-bs-target="#modalId">
+            <x-ticket></x-ticket> Mostrar Tickets
+            </button>
             
             <!-- Modal Body -->
             <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
@@ -176,9 +170,7 @@
                 </div>
             </div>
 
-            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalId">
-            Mostrar Tickets
-            </button>
+            
             
             <!-- Modal Body -->
             <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
@@ -190,11 +182,43 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            
+                            <div class="table-responsive-md">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Id Producto</th>
+                                            <th>Nombre</th>
+                                            <th>Descripcion</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio Menudeo</th>
+                                            <th>Precio Mayoreo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($item as $producto)
+                                            <tr>
+                                                <td>{{ $producto->getIdProducto() }}</td>
+                                                <td>{{ $producto->getNombre() }}</td>
+                                                <td>{{ $producto->getDescripcion() }}</td>
+                                                <td>{{ $producto->getCantidad() }}</td>
+                                                <td>{{ $producto->getPrecioMenudeo() }}</td>
+                                                <td>{{ $producto->getPrecioMayoreo() }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                @if($auto_cerrar)
+                                    <a href="{{ route('Configuracion', ['User' => $usuario]) }}" class="btn btn-primary">
+                                        Ir al menú
+                                    </a>
+                                @endif
+                            </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary">Mostrar</button>
-                            <button type="button" class="btn btn-primary">Cerrar</button>
+                            <button type="button" class="btn btn-secondary">
+                            <x-ticket-detallado></x-ticket-detallado> Mostrar
+                            </button>
+                            
                         </div>
                     </div>
                 </div>
