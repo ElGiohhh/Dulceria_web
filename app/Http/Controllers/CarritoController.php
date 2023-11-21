@@ -11,16 +11,10 @@ class CarritoController extends Controller
 
     public function index(Request $request)
     {
-        
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Obtener los productos seleccionados del cuerpo de la solicitud
-        $productos_seleccionados = $_POST['productos_seleccionados'] ?? [];
+        $producto_seleccionados = Product::where('estado', 'seleccionado')->post(); // Obtiene los productos seleccionados, ajusta la condición según sea necesario
 
-        // Aquí puedes procesar los productos seleccionados, guardarlos en una base de datos, etc.
-        // Por ejemplo, imprimir los productos seleccionados:
-        echo json_encode($productos_seleccionados); // Envía los productos seleccionados de vuelta como JSON
-        exit; // Termina el script
-    }
+        return view('crud.Venta', compact('producto_seleccionados'));
+
     }
 
     
