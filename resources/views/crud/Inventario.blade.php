@@ -58,6 +58,7 @@
     </td>
     </div>
     </nav>
+      <div style="overflow-x:auto;">
         <table class="table table-bordered border-primary" id="productos">
             <thead class="table-dark">
                 <tr>
@@ -88,6 +89,7 @@
             </tbody>
             
         </table>
+        </div>
     @endsection
     </div>
 
