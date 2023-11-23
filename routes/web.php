@@ -61,6 +61,9 @@ Route::resource('producto', ProductoController::class)->middleware(['auth', 'ver
 
 Route::resource('carrito', CarritoController::class)->middleware(['auth', 'verified']);
 
+Route::delete('/producto', [ProductoController::class, 'destroy'])->name('producto.destroy');
+
+
 
 
 

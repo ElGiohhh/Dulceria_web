@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +26,7 @@
         <div class="container-fluid">
           <a class="navbar-brand" aria-current="page" href="dashboard">Inicio</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+           <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -47,7 +47,7 @@
       
 
         <!-- Responsive Settings Options -->
-        <div class="pt-2 pb-1 border-t border-gray-200 dark:border-gray-600">
+        <div class="pt-2 pb-1 bordert border-gray-200 dark:border-gray-600">
             <div class="px-3">
                 <div class="text-white ">{{(auth()!= null && auth()->user() != null)?auth()->user()->name:"No login"}}</div>
                 <!--<div class="font-medium text-sm text-gray-500">{{(auth()!= null && auth()->user() != null)?auth()->user()->email:"No login"}}</div>-->

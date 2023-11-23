@@ -5,14 +5,14 @@
         </h2>
     </x-slot>
             <button type="button" class="btn btn-success btn-lg m-3 p-3" data-bs-toggle="modal" data-bs-target="#registrartra">
-                <x-logo></x-logo>  Registrar producto
+                <x-alta></x-alta>  Registrar producto
             </button>
             <button type="button" class="btn btn-success btn-lg m-3 p-3" data-bs-toggle="modal" data-bs-target="#ModalCL">
                <x-logo></x-logo>     Registrar Cliente
             </button>
             <br>
             <button type="button" class="btn btn-danger  btn-lg m-3 p-3" data-bs-toggle="modal" data-bs-target="#Eliminar">
-            <x-logoa></x-logoa>  Eliminar producto
+            <x-baja></x-baja>  Eliminar producto
             </button>
             <button type="button" class="btn btn-danger  btn-lg m-3 p-3" data-bs-toggle="modal" data-bs-target="#EliminarCl">
             <x-logoa></x-logoa>  Eliminar Cliente
@@ -28,7 +28,7 @@
                 <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modalTitleId">Modal title</h5>
+                            <h5 class="modal-title" id="modalTitleId">Registro de Producto</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -84,11 +84,11 @@
             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalTitleId">Modal title</h5>
+                        <h5 class="modal-title" id="modalTitleId">Dar alta Cliente</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                        <form method="GET" action="#">
+                        <form method="POST" action="#">
                         <div>
                         <x-input-label for="Nombre" :value="__('Nombre')" />
                         <br>
@@ -122,19 +122,20 @@
             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalTitleId">Modal title</h5>
+                        <h5 class="modal-title" id="modalTitleId">Eliminar Producto</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    <form method="GET" action="{{ route('producto.store') }}">
+                    <form method="POST" action="{{ route('producto.destroy') }}">
+                    @csrf
+                    @method('DELETE')
                     <div>
                     <x-input-label for="nombre" :value="__('nombre')" />
                     <x-text-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" :value="old('nombre')" required autofocus autocomplete="nombre" />
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                    </div>
                     <div class="flex items-center justify-end mt-4">
                     <button class="btn btn-primary ms-4" style="background-color: #fd7e14; border-color: #fd7e14">
-                        {{ __('Registro') }}
+                    Eliminar
                     </button>
                     </div>
                     </form>
@@ -148,7 +149,7 @@
             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalTitleId">Modal title</h5>
+                        <h5 class="modal-title" id="modalTitleId">Eliminar Cliente</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -178,40 +179,32 @@
                 <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modalTitleId">Modal title</h5>
+                            <h5 class="modal-title" id="modalTitleId">Tickets Almacenados</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <div class="table-responsive-md">
+                            <div class="table-responsive-sm">
                                 <table class="table">
-                                    <thead>
+                                    <thead class="table-dark">
                                         <tr>
-                                            <th>Id Producto</th>
-                                            <th>Nombre</th>
-                                            <th>Descripcion</th>
-                                            <th>Cantidad</th>
-                                            <th>Precio Menudeo</th>
-                                            <th>Precio Mayoreo</th>
+                                            <th scope="col">Column 1</th>
+                                            <th scope="col">Column 2</th>
+                                            <th scope="col">Column 3</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($item as $producto)
-                                            <tr>
-                                                <td>{{ $producto->getIdProducto() }}</td>
-                                                <td>{{ $producto->getNombre() }}</td>
-                                                <td>{{ $producto->getDescripcion() }}</td>
-                                                <td>{{ $producto->getCantidad() }}</td>
-                                                <td>{{ $producto->getPrecioMenudeo() }}</td>
-                                                <td>{{ $producto->getPrecioMayoreo() }}</td>
-                                            </tr>
-                                        @endforeach
+                                        <tr class="">
+                                            <td scope="row">R1C1</td>
+                                            <td>R1C2</td>
+                                            <td>R1C3</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td scope="row">Item</td>
+                                            <td>Item</td>
+                                            <td>Item</td>
+                                        </tr>
                                     </tbody>
                                 </table>
-                                @if($auto_cerrar)
-                                    <a href="{{ route('Configuracion', ['User' => $usuario]) }}" class="btn btn-primary">
-                                        Ir al menú
-                                    </a>
-                                @endif
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -231,3 +224,4 @@
             </script>
                 
 </x-plantilla>  
+

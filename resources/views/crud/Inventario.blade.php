@@ -18,25 +18,31 @@
     @csrf
     <button type="submit button" class="btn btn-primary btn-lg" onclick="enviarProductos()">Agregar al carrito</button>
     <script>
-    function enviarProductos() {
+        function enviarProductos() {
         // Obtener todos los checkboxes con el nombre 'productos_seleccionados[]'
         const checkboxes = document.querySelectorAll('input[name="productos_seleccionados[]"]:checked');
         
-        // Crear un array para almacenar los valores seleccionados
-        const productosSeleccionados = [];
+        // Crear un array para almacenar los datos de los productos seleccionados con cantidad 1
+        const productosConDatos = [];
         
-        // Recorrer los checkboxes seleccionados y obtener sus valores
+        // Recorrer los checkboxes seleccionados y agregar los datos al array
         checkboxes.forEach((checkbox) => {
-            productosSeleccionados.push(checkbox.value);
+            const producto = {
+                id: checkbox.value,
+                nombre: checkbox.parentNode.parentNode.cells[0].innerText,
+                cantidad: 1 ,
+                precio_menudeo: checkbox.parentNode.parentNode.cells[3].innerText
+            };
+            productosConDatos.push(producto);
         });
         
         // Crear un objeto con los datos que se enviarán en la solicitud POST
         const data = {
-            productos_seleccionados: productosSeleccionados
+            productos: productosConDatos
         };
         
         // Realizar la solicitud POST utilizando Fetch API
-        fetch('./Carrito', {
+        fetch('./Venta', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -53,7 +59,6 @@
             console.error('Error en la solicitud POST', error);
         });
     }
-
     </script>
     </td>
     </div>
