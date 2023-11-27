@@ -1,9 +1,14 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TicketController;
+use App\Models\Producto;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 
 
 
@@ -22,46 +27,63 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// auth::routes(['register' => false]);
 
-//auth::routes(['register' => false]);
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('Inicio');
+    })->name('Inicio');
 
-Route::get('/Clientes', [ClientesController::class, 'function'])->name('Clientes');
+    Route::get('/Configuracion', function () {
+        return view('Configuracion');
+    })->name('Configuracion');
 
-Route::get('/dashboard', function () {
-    return view('Inicio');
-})->middleware(['auth', 'verified'])->name('Inicio');
+    Route::get('/Registro', function () {
+        return view('auth\Registro');
+    })->name('Registro');
 
-Route::get('/Configuracion', function () {
-    return view('Configuracion');
-})->middleware(['auth', 'verified'])->name('Configuracion');
+    Route::post('/Venta', function (Request $request) {
+        $productos = $request->input('productos', '[]');
+        $productos = json_decode($productos, true);
 
-Route::get('/Registro', function () {
-    return view('auth\Registro');
-})->middleware(['auth', 'verified'])->name('Registro');
+        $productosCompletos = Producto::whereIn('id', array_column($productos, 'id'))->get();
 
-Route::get('/Venta', function () {
-    return view('crud\Venta');
-})->middleware(['auth', 'verified'])->name('Venta');
+        foreach ($productosCompletos as &$productoCompleto) {
+            foreach ($productos as $producto) {
+                if ($productoCompleto->id == $producto['id']) {
+                    $productoCompleto->cantidad = $producto['cantidad'];
+                    break;
+                }
+            }
+        }
+        return view('crud\Venta', compact('productosCompletos'));
+    })->name('Venta');
 
-Route::get('/Rproducto', function () {
-    return view('Rproducto');
-})->middleware(['auth', 'verified'])->name('Rproducto');
+    Route::get('/Rproducto', function () {
+        return view('Rproducto');
+    })->name('Rproducto');
 
-
-Route::middleware('auth')->group(function () {
     Route::get('/RegistrarProducto', [ProfileController::class, 'edit'])->name('RegistrarProducto.edit');
     Route::patch('/RegistrarProducto', [ProfileController::class, 'update'])->name('RegistrarProducto.update');
     Route::delete('/RegistrarProducto', [ProfileController::class, 'destroy'])->name('RegistrarProducto.destroy');
+
+    Route::post('/mostrar-productos-seleccionados', 'ProductoController@mostrarProductosSeleccionados')->name('mostrar.productos.seleccionados');
+
+    Route::resource('producto', ProductoController::class);
+    Route::resource('carrito', CarritoController::class);
+
+    Route::delete('/producto', [ProductoController::class, 'destroy'])->name('producto.destroy');
+    Route::delete('/cliente', [ClientesController::class, 'destroy'])->name('cliente.destroy');
+    
+    Route::post('/cliente/store', [ClientesController::class, 'store'])->name('cliente.store');
+
+    Route::get('/Venta', [TicketController::class, 'list'])->name('Venta');
+    Route::get('/tickets/list', [TicketController::class, 'list'])->name('tickets.list');
+
+    Route::post('/tickets/new', [TicketController::class, 'create'])->name('tickets.create');
 });
 
-
-Route::post('/mostrar-productos-seleccionados', 'ProductoController@mostrarProductosSeleccionados')->name('mostrar.productos.seleccionados');
-
-Route::resource('producto', ProductoController::class)->middleware(['auth', 'verified']);
-
-Route::resource('carrito', CarritoController::class)->middleware(['auth', 'verified']);
-
-Route::delete('/producto', [ProductoController::class, 'destroy'])->name('producto.destroy');
+Route::get('/Clientes', [ClientesController::class, 'function'])->name('Clientes');
 
 
 

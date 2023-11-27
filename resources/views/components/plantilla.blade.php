@@ -31,13 +31,13 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="producto"> <x-inve></x-inve> Inventario</a>
+              <a class="nav-link active" aria-current="page" href="/producto"> <x-inve></x-inve> Inventario</a>
               </li>
               <li class="nav-item ">
-                <a class="nav-link active" aria-current="page" href="Venta"> <x-vent></x-vent> Venta</a>
+                <a class="nav-link active" aria-current="page" href="/Venta"> <x-vent></x-vent> Venta</a>
               </li>
              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="Configuracion"> <x-confi></x-confi> Configuracion</a>
+                <a class="nav-link active" aria-current="page" href="/Configuracion"> <x-confi></x-confi> Configuracion</a>
               </li>
             </ul>
             

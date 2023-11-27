@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\productos;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller
@@ -12,9 +12,9 @@ class ProductoController extends Controller
         $search = $request->get('search'); 
    
         if ($search) {
-            $lista_producto = productos::where('nombre', 'LIKE', '%' . $search . '%')->get();
+            $lista_producto = Producto::where('nombre', 'LIKE', '%' . $search . '%')->get();
         } else {
-            $lista_producto = productos::all();
+            $lista_producto = Producto::all();
         }
         return view('crud.Inventario', compact('lista_producto'));
     }
@@ -30,23 +30,27 @@ class ProductoController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string',
-            'cantidad' => 'required|int|max:10',
-            'precio_menudeo' => 'required|max:6',
-            'precio_mayoreo' => 'required|max:6',
+            'cantidad' => 'required|integer|max:10',
+            'precio_menudeo' => 'required|numeric|max:999999.99',
+            'precio_mayoreo' => 'required|numeric|max:999999.99',
+            'precio_compra' => 'required|numeric|max:999999.99',
         ]);
 
-        $producto = new productos;
-        $producto->nombre = $request->nombre;
-        $producto->descripcion = $request->descripcion;
-        $producto->cantidad = $request->cantidad;
-        $producto->precio_menudeo = $request->precio_menudeo;
-        $producto->precio_mayoreo = $request->precio_mayoreo;
         // Crea un nuevo producto en la base de datos
-        //Product::create($request->all());
+        $producto = new Producto([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'cantidad' => $request->cantidad,
+            'precio_menudeo' => $request->precio_menudeo,
+            'precio_mayoreo' => $request->precio_mayoreo,
+            'precio_compra' => $request->precio_compra,
+        ]);
+
         $producto->save();
 
-        return redirect()->back() ->with('success', 'Producto creado correctamente');
+        return redirect()->back()->with('success', 'Producto creado correctamente');
     }
+
 
     public function edit($id)
     {
@@ -59,11 +63,20 @@ class ProductoController extends Controller
         
     }
 
-    public function destroy($nombre)
+    public function destroy(Request $request)
     {
-        $producto = $nombre;
+        $nombre = $request->input('nombre');
+        
+        $producto = Producto::where('nombre', $nombre)->first();
+        
+        if (!$producto) {
+            return redirect()->back()->with(["mensaje" => "Producto no encontrado"]);
+        }
+
         $producto->delete();
-        return redirect()->back()->with(["mensaje"=>"Exito"]);
+        return redirect()->back()->with(["mensaje" => "Producto eliminado con éxito"]);
     }
+
+
 }
 
