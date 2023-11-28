@@ -18,10 +18,10 @@
             <x-logoa></x-logoa>  Eliminar Cliente
             </button>
             <br>
-           <!-- Button trigger modal -->
+           <!-- Button trigger modal 
            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#Ticket">
              Launch
-           </button>
+           </button>-->
             
             <!-- Modal Body -->
             <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
