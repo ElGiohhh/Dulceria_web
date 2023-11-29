@@ -34,7 +34,7 @@
               <a class="nav-link active" aria-current="page" href="/producto"> <x-inve></x-inve> Inventario</a>
               </li>
               <li class="nav-item ">
-                <a class="nav-link active" aria-current="page" href="/Venta"> <x-vent></x-vent> Venta</a>
+                <a class="nav-link active" aria-current="page" href="/Venta"> <x-vent></x-vent>         Tickets</a>
               </li>
              <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/Configuracion"> <x-confi></x-confi> Configuracion</a>

@@ -30,7 +30,7 @@
                     @endauth
                 </div>
             @endif
-          <img src="{{ asset('imagenes/Proyecto nuevo.png') }}" alt=" ">
+            <img src="{{ asset('imagenes/Proyecto nuevo.png') }}" alt=" ">
         </div>
         
         
