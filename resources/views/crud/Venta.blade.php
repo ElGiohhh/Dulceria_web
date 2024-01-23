@@ -31,7 +31,6 @@
                     <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Precio Menudeo</th>
-                    <th>Precio Mayoreo</th>
                     <th>Cantidad</th>
                 </tr>
             </thead>
@@ -42,7 +41,6 @@
                         <td>{{ $producto->nombre }}</td>
                         <td>{{ $producto->descripcion }}</td>
                         <td>{{ $producto->precio_menudeo }}</td>
-                        <td>{{ $producto->precio_mayoreo }}</td>
                         <td>
                             <input type="number" name="productos_seleccionados[]" id="productos_seleccionados_{{ $producto->id }}" value="{{ $producto->cantidad }}" data-id="{{ $producto->id }}">
                         </td>

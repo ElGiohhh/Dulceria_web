@@ -24,6 +24,7 @@
                 </td>
             </div>
         </nav>
+        
         <div style="overflow-x:auto;">
             <table class="table table-bordered border-primary" id="productos">
                 <thead class="table-dark">
@@ -32,7 +33,6 @@
                         <th>Descripción</th>
                         <th>Cantidad</th>
                         <th>Precio menudeo</th>
-                        <th>Precio mayoreo</th>
                         <th> </th>
                     </tr>
                 </thead>
@@ -43,7 +43,6 @@
                         <td>{{ $item->descripcion }}</td>
                         <td>{{ $item->cantidad }}</td>
                         <td>{{ $item->precio_menudeo }}</td>
-                        <td>{{ $item->precio_mayoreo }}</td>
                         <td>
                             <input type="number" name="productos_seleccionados[]" id="productos_seleccionados_{{ $item->id }}" value="0" data-id="{{ $item->id }}">
                         </td>
@@ -51,6 +50,7 @@
                     @endforeach
                 </tbody>
             </table>
+           
         </div>
         @endsection
     </div>
